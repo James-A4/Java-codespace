@@ -1,6 +1,12 @@
+import java.util.Scanner;
+
 public class LeapYear {
     public static void main(String[] args) {
-        int year = Comp122.getInt("Please enter a year");
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Please enter a year: ");
+        int year = scanner.nextInt();
+
         System.out.println(isLeapYear(year));
     }
 
@@ -9,20 +15,15 @@ public class LeapYear {
 
         if (year % 4 == 0) 
             if((year % 100 == 0) && (year % 400 != 0)) {
-                leapYear = false;  // Your code here
+                leapYear = false; 
             }
             else {
                 leapYear = true;
             }
-        
         else {
             leapYear = false;
         }
-        
+
         return leapYear;
     }
-    public static boolean isLeapYearCondensed(int year) {
-        return (year % 4 == 0) && (year % 100 != 0);
-    }
-
 }
