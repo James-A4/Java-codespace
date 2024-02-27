@@ -1,85 +1,99 @@
-public class Brutus {
-
+public class demo {
     public static final double[] english = {
         0.0855, 0.0160, 0.0316, 0.0387, 0.1210, 0.0218, 0.0209, 0.0496, 0.0733,
         0.0022, 0.0081, 0.0421, 0.0253, 0.0717, 0.0747, 0.0207, 0.0010, 0.0633,
         0.0673, 0.0894, 0.0268, 0.0106, 0.0183, 0.0019, 0.0172, 0.0011
     };
 
-    public static int[] count(String content) {
-        int[] counts = new int[26];
-        content = content.toLowerCase();
-        for (char character : content.toCharArray()) {
-            if (Character.isLetter(character)) {
-                int index = character - 'a';
-                counts[index]++;
-            }
+
+    public static void main(String[] args){
+        String sentence = args[0];
+        int number = 0;
+
+    if(args.length != 1){  
+
+        if (args.length <= 0){
+            System.out.println("Too few parameters!");
         }
-        return counts;
+        else{
+            System.out.println("Too many parameters!");
+        }
+
+        System.out.println("Usage: java Brutus \"cipher text\"");
+        return;
+    }   
+
+    String greatestString = "";
+    double greatestChiSquard = 100000;
+
+    for (int i = 0; i < 26 ; i++){
+        sentence = Caesarr.rotate(i,sentence);
+        double chiSquared = chiSquared(frequency(sentence),english);
+
+        if(chiSquared < greatestChiSquard){
+            greatestChiSquard = chiSquared;
+            greatestString = sentence;
+        }
     }
 
-    public static double[] frequency(String content) {
-        int[] counts = count(content);
-        double[] frequencies = new double[26];
-        int totalLetters = content.length();
+    System.out.println(greatestString);
+
+    }
+
+
+    public static int[] count(String sentence){
+        int[] arrayAlphabet = new int[26];  // This creates a new array whith a length-26 index 
+
+        for(int i = 0 ; i < sentence.length() ; i++){
+            char myChar = sentence.charAt(i);
+
+            if(myChar >= 'a' && myChar <= 'z'){
+                int charNumber = myChar - 'a';      
+                //example: myChar = 'c'   --->    'c' - 'a' =  99-97 = 2  ,   
+                //arrayAlphabet[0] = a, [1] = b, [2]=c ......
+                arrayAlphabet[charNumber] = arrayAlphabet[charNumber] + 1; 
+            }
+            else if(myChar >= 'A' && myChar <= 'Z'){
+                int charNumber = myChar - 'A';
+                arrayAlphabet[charNumber] = arrayAlphabet[charNumber] + 1;
+            }
+        }
+        return arrayAlphabet;
+    }
+    
+    public static double[] frequency(String sentence){
+        double[] frequency = new double[26];
+        int totalAlphabet = 0;
+
+        for (int i = 0; i < sentence.length() ; i++){
+            char myChar = sentence.charAt(i);
+
+            if(myChar >= 'a' && myChar <='z'){
+                frequency[myChar - 'a']++;
+                totalAlphabet++;
+            }
+        }
+
         for (int i = 0; i < 26; i++) {
-            frequencies[i] = (double) counts[i] / totalLetters;
+            frequency[i] /= totalAlphabet;
         }
-        return frequencies;
+
+        return frequency;   
     }
 
-    public static double chiSquared(double[] freq1, double[] freq2) {
-        double chiSquared = 0.0;
-        for (int i = 0; i < 26; i++) {
-            double observed = freq1[i];
-            double expected = freq2[i];
-            chiSquared += Math.pow(observed - expected, 2) / expected;
-        }
-        return chiSquared;
+    public static double chiSquared(double[] frequency, double[] english){
+        double chi = 0;
+    
+    for (int i = 0 ; i < 26 ; i++){
+        double difference = frequency[i] - english[i];
+        double equation = difference * difference;
+        chi += equation/english[i]; 
     }
 
-    public static void main(String[] args) {
-        if (args.length != 1) {
-            System.out.println("Too few or too many parameters!");
-            System.out.println("Usage: java Brutus \"cipher text\"");
-            return;
-        }
-        String content = args[0];
-        String result = decipher(content);
-        System.out.println(result);
-    }
-
-    public static String decipher(String content) {
-        double[] cipherFreq = frequency(content);
-        double minChiSquared = Double.MAX_VALUE;
-        int bestShift = 0;
-        for (int shift = 0; shift < 26; shift++) {
-            double[] shiftedFreq = new double[26];
-            for (int i = 0; i < 26; i++) {
-                int shiftedIndex = (i - shift + 26) % 26;
-                shiftedFreq[i] = english[shiftedIndex];
-            }
-            double chiSquared = chiSquared(cipherFreq, shiftedFreq);
-            if (chiSquared < minChiSquared) {
-                minChiSquared = chiSquared;
-                bestShift = shift;
-            }
-        }
-        return shift(content, bestShift);
-    }
-
-    public static String shift(String content, int shift) {
-        StringBuilder decryptedContent = new StringBuilder();
-        for (char character : content.toCharArray()) {
-            if (Character.isLetter(character)) {
-                char base = Character.isLowerCase(character) ? 'a' : 'A';
-                char shiftedChar = (char) ((character - base - shift + 26) % 26 + base);
-                decryptedContent.append(shiftedChar);
-            } else {
-                decryptedContent.append(character);
-            }
-        }
-        return decryptedContent.toString();
+    return chi;
     }
 }
+    
+
+
 
