@@ -16,7 +16,7 @@ public class Caesar{
         return;
     }   
 
-    int shiftOfLevel = Integer.parseInt(args[0]);  // The first argument is for the integers, this shows the level of the shift
+    int shiftOfLevel = Integer.parseInt(args[0]);  // The first argument is for the integers, this shows the size of the shift
     String sentence = args[1];   //The second arguments is for the strings that we need to be be able to decipher to reveal what we need
     System.out.println(rotate(shiftOfLevel, sentence));  // 
     }

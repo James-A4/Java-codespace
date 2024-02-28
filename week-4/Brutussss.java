@@ -1,4 +1,4 @@
-public class Brutusatt {
+public class Brutussss {
 
     public static final double[] english = {
         0.0855, 0.0160, 0.0316, 0.0387, 0.1210, 0.0218, 0.0209, 0.0496, 0.0733,
