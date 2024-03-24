@@ -24,7 +24,7 @@ public class Largest {
                 }
             }
 
-            System.out.println("Largest value: " + largestValue);
+            System.out.println(largestValue);
         }
 
         scanner.close();
