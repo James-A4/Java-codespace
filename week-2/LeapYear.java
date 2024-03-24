@@ -8,6 +8,8 @@ public class LeapYear {
         int year = scanner.nextInt();
 
         System.out.println(isLeapYear(year));
+
+        scanner.close();
     }
 
     public static boolean isLeapYear(int year) {

@@ -1,3 +1,9 @@
+public class Caesar {
+    public static String rotate(int shift, String text) {
+        // Implementation of the rotate method
+        // ...
+    }
+}
 public class Brutus {
     public static final double[] english = {
         0.0855, 0.0160, 0.0316, 0.0387, 0.1210, 0.0218, 0.0209, 0.0496, 0.0733,
@@ -23,19 +29,27 @@ public class Brutus {
         }   
 
         String longestString = "";
-        double longestChiSquard = 100000;
+        // ...
 
-        for (int i = 0; i < 26 ; i++){
-            sentence = Caesar.rotate(i,sentence);
-            double chiSquared = chiSquared(frequency(sentence),english);
+                double longestChiSquard = 100000;
 
-            if(chiSquared < longestChiSquard){
-                longestChiSquard = chiSquared;
-                longestString = sentence;
+                for (int i = 0; i < 26 ; i++){
+                    sentence = Caesar.rotate(i,sentence);
+                    double chiSquared = chiSquared(frequency(sentence),english);
+
+                    if(chiSquared < longestChiSquard){
+                        longestChiSquard = chiSquared;
+                        longestString = sentence;
+                    }
+                }
+
+                System.out.println(longestString);
+        public class Caesar {
+            public static String rotate(int shift, String text) {
+                // Implementation of the rotate method
+                // ...
             }
         }
-
-        System.out.println(longestString);
     }
 
     public static int[] count(String sentence){
