@@ -1,12 +1,7 @@
 public class Caesar{
     public static void main(String[] args) {
     
-    /**
-     * @param args The sentence that need to be encrypted
-     */
-
-
-    if(args.length != 2){    
+    /if(args.length != 2){    
         if (args.length < 2){
             System.out.println("Too few parameters!");
         }else{
