@@ -10,7 +10,7 @@ public class Encrypt {
         char[] chars = text.toCharArray();
 
         for(char c : chars) {
-            c += key;
+            c -= key;
             System.out.print(c);
         }
         
