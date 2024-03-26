@@ -44,7 +44,7 @@ public class Caesar {
 
 
 
-    public char rotate(int shift, char ch) {
+    public static char rotate(int shift, char ch) {
         if (Character.isUpperCase(ch)) {
             return (char) ('A' + (ch - 'A' + shift) % 26);
         } else if (Character.isLowerCase(ch)) {

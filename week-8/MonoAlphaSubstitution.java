@@ -7,21 +7,17 @@ public class MonoAlphaSubstitution extends Substitution {
 
 
 
-
     public MonoAlphaSubstitution() {
-        this.mappedLetters = new char[]{'a', 'b', 'c', 'd', 'e', 'f', 
-                                        'g', 'h', 'i', 'j', 'k', 'l', 
-                                        'm', 'n', 'o', 'p', 'q', 'r', 
-                                        's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
+        this.mappedLetters = this.originalLetters.clone();
     }
 
 
-
+    
     public MonoAlphaSubstitution(String mapping) {
         this();
         for (int i = 0; i < mapping.length() - 1; i += 2) {
             char original = mapping.charAt(i);
-            char newChar= mapping.charAt(i + 1);
+            char newChar = mapping.charAt(i + 1);
             int originalValue = new String(originalLetters).indexOf(original);
             if (originalValue != -1) {
                 mappedLetters[originalValue] = newChar;
@@ -29,10 +25,13 @@ public class MonoAlphaSubstitution extends Substitution {
         }
     }
 
+
     public char encrypt(char ch) {
         int originalValue = new String(originalLetters).indexOf(ch);
         return originalValue != -1 ? mappedLetters[originalValue] : ch;
     }
+
+
 
     public char decrypt(char ch) {
         int mappedValue = new String(mappedLetters).indexOf(ch);
@@ -40,14 +39,15 @@ public class MonoAlphaSubstitution extends Substitution {
     }
 
 
-    
+
     public static void main(String[] args) {
         if (args.length != 3) {
-
             System.out.println(args.length < 3 ? "Too few parameters!" : "Too many parameters!");
             System.out.println("Usage: java MonoAlphaSubstitution process key \"cipher text\"");
             return;
         }
+
+
 
         String process = args[0];
         String key = args[1];
@@ -55,8 +55,6 @@ public class MonoAlphaSubstitution extends Substitution {
 
 
         MonoAlphaSubstitution cipher = new MonoAlphaSubstitution(key);
-
-
 
 
         if ("encrypt".equals(process)) {
