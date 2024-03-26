@@ -1,31 +1,23 @@
-public interface cipher {
-
-    String encrypt(String plaintext);
-    String decrypt(String cryptotext);
-}
-
-
 public abstract class Substitution implements cipher {
 
-
-    public abstract char encrypt(char c);
-    public abstract char decrypt(char c);
+    public abstract char encrypt(char ch);
+    public abstract char decrypt(char ch);
+    
+    
+    public String decrypt(String cryptotext) {
+        StringBuilder decryptedText = new StringBuilder();
+        for (char ch : cryptotext.toCharArray()) {
+            decryptedText.append(decrypt(ch));
+        }
+        return decryptedText.toString();
+    }
 
 
     public String encrypt(String plaintext) {
-        FullString encryptedString = new FullString();
-        for (char c : plaintext.toCharArray()) {
-            encryptedString.append(encrypt(c));
+        StringBuilder encryptedText = new StringBuilder();
+        for (char ch : plaintext.toCharArray()) {
+            encryptedText.append(encrypt(ch));
         }
-        return encryptedString.toString();
+        return encryptedText.toString();
     }
-
-    public String decrypt(String cryptotext) {
-        FullString decryptedString = new FullString();
-        for (char c : cryptotext.toCharArray()) {
-            decryptedString.append(decrypt(c));
-        }
-        return decryptedString.toString();
-    }
-
-} 
+}

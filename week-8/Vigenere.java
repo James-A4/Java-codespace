@@ -1,9 +1,10 @@
-import java.util.Arrays;
+import java.util.Scanner;
 
-public class Vigenere {
+public class Cipher {
     
 }
-public class Vigenere extends Substitution {
+
+public static void encrypt (char[])
     private String keyword;
     private int position;
 
