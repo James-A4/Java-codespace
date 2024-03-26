@@ -1,14 +1,22 @@
 public class MonoAlphaSubstitution extends Substitution {
 
-
-    public static char originalLetters[] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
-                                            'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
-                                            'u', 'v', 'w', 'x', 'y', 'z'};
+    public static void main(String[] args) {
+        MonoAlphaSubstitution monoAlphaSubstitution = new MonoAlphaSubstitution("aA");
+        System.out.println(monoAlphaSubstitution.encrypt('a'));
+    }
     
 
-    public static char mappedLetters[] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 
-                                          'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
-                                          'u', 'v', 'w', 'x', 'y', 'z'};
+
+    public static char originalLetters[] = {'a', 'b', 'c', 'd', 'e', 'f', 
+                                            'g', 'h', 'i', 'j','k', 'l',
+                                            'm', 'n', 'o', 'p', 'q', 'r', 
+                                            's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
+    
+
+    public static char mappedLetters[] = {'a', 'b', 'c', 'd', 'e', 'f', 
+                                          'g', 'h', 'i', 'j','k', 'l',
+                                          'm', 'n', 'o', 'p', 'q', 'r', 
+                                          's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
 
 
     public MonoAlphaSubstitution(String mapped) {
