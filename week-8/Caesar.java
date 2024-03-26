@@ -1,67 +1,57 @@
 import java.util.Scanner;
 
 public class Caesar {
+    private int shift;
 
+    public Caesar(int shift) {
+        this.shift = shift;
+    }
 
     public static void main(String[] args) {
 
-        if(args.length != 2){    
-            if (args.length < 2){
-                System.out.println("Too few parameters!");
-            }else{
-                System.out.println("Too many parameters!");
-            }
-            System.out.println("Usage: java Caesar n \"cipher text\"");
-            return;
-        }   
 
-
-
-        
         Scanner scanner = new Scanner(System.in);
-        
 
-        System.out.println("Please enter integer shift value: ");
-        int shift;
-        try {
-            shift = Integer.parseInt(scanner.nextLine());
-        }
-            return;
-        }
-        System.out.println("Please enter text to encrypt: ");
-        String message = scanner.nextLine();
-        
-        
-        System.out.println(new String);
 
+        System.out.println("Please enter an integer shift value: ");
+        int shift = Integer.parseInt(scanner.nextLine());
+
+
+        System.out.println("Please enter text to be encrypted: ");
+        String text = scanner.nextLine();
+
+        String encryptedText = rotate(shift, text);
+
+
+        System.out.println(encryptedText);
     }
 
-        
-        public static char rotate(int shift, char ch) {
 
-            if (Character.isUpperCase(ch)) {
-                return (char) ('A' + (ch - 'A' + shift) % 26);
-            } else if (Character.isLowerCase(ch)) {
-                return (char) ('a' + (ch - 'a' + shift) % 26);
-            } else {
-                return ch;
-            }
+
+
+    public static String rotate(int shift, String text) {
+
+        StringBuilder outcome = new StringBuilder();
+        for (char ch : text.toCharArray()) {
+            outcome.append(rotate(shift, ch));
+
         }
+        return outcome.toString();
+    }
 
-        public static String rotate(int shift, String text) {
-            StringBuilder newString = new StringBuilder();
-            for (int i = 0; i < text.length(); i++) {
 
-                newString.append(rotate(shift, text.charAt(i)));
 
-            }
-            return newString.toString();
+
+
+
+    public char rotate(int shift, char ch) {
+        if (Character.isUpperCase(ch)) {
+            return (char) ('A' + (ch - 'A' + shift) % 26);
+        } else if (Character.isLowerCase(ch)) {
+            return (char) ('a' + (ch - 'a' + shift) % 26);
+
+        } else {
+            return ch;
         }
-
-
-
     }
 }
-
-
-         
