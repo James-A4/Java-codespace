@@ -2,76 +2,66 @@ import java.util.Scanner;
 
 public class Caesar {
 
+
     public static void main(String[] args) {
-            if (args.length < 2) {
+
+        if(args.length != 2){    
+            if (args.length < 2){
                 System.out.println("Too few parameters!");
-                System.out.println("Usage: java Caesar encryp n \"cipher text\"");
-                return;
-            } else if (args.length > 2) {
+            }else{
                 System.out.println("Too many parameters!");
-                System.out.println("Usage: java Caesar encrypt n \"cipher text\"");
-                return;
             }
+            System.out.println("Usage: java Caesar n \"cipher text\"");
+            return;
+        }   
 
-            int shift;
-            try {
-                shift = Integer.parseInt(args[1]);
-            } catch (NumberFormatException e) {
-                System.out.println("Shift value not valid");
-                return;
-            }
 
-            String input = args[2];
 
-            String result;
-            if (args[0].equals("encrypt")) {
-                result = rotate(shift, input);
+        
+        Scanner scanner = new Scanner(System.in);
+        
 
-            }
-                return;
-            }
-
-            System.out.println(result);
-        }
+        System.out.println("Please enter integer shift value: ");
+        int shift;
         try {
-            shift = Integer.parseInt(args[0]);
-        } catch (NumberFormatException e) {
+            shift = Integer.parseInt(scanner.nextLine());
+        }
             return;
         }
+        System.out.println("Please enter text to encrypt: ");
+        String message = scanner.nextLine();
+        
+        
+        System.out.println(new String);
 
-        String input = args[1];
-
-        String encryptedText = rotate(shift, input);
-        System.out.println(encryptedText);
     }
 
-    public static char rotate(int shift, char c) {
-        if (!Character.isLetter(c)) {
-            return c;
+        
+        public static char rotate(int shift, char ch) {
+
+            if (Character.isUpperCase(ch)) {
+                return (char) ('A' + (ch - 'A' + shift) % 26);
+            } else if (Character.isLowerCase(ch)) {
+                return (char) ('a' + (ch - 'a' + shift) % 26);
+            } else {
+                return ch;
+            }
         }
 
-        int integerShift = (int) c + shift;
-        char newChar;
+        public static String rotate(int shift, String text) {
+            StringBuilder newString = new StringBuilder();
+            for (int i = 0; i < text.length(); i++) {
 
-        if (Character.isLowerCase(c)) {
-            newChar = (char) ((integerShift - 'a' + 26) % 26 + 'a');
-        } else {
-            newChar = (char) ((integerShift - 'A' + 26) % 26 + 'A');
+                newString.append(rotate(shift, text.charAt(i)));
+
+            }
+            return newString.toString();
         }
 
-        return newChar;
-    }
 
-    public static String rotate(int shift, String text) {
-        StringBuilder encryptedText = new StringBuilder();
 
-        for (int i = 0; i < text.length(); i++) {
-            char c = text.charAt(i);
-            encryptedText.append(rotate(shift, c));
-        }
-
-        return encryptedText.toString();
     }
 }
 
-  
+
+         
